@@ -40,6 +40,23 @@ function readFrontmatter(raw) {
   return fields;
 }
 
+// Upstream command bodies target the Claude Code plugin runtime: they tell the
+// agent to call the Skill tool and to resolve plugin files from
+// ${CLAUDE_PLUGIN_ROOT}. DSH has neither, and the wrapper header below already
+// names the skill to load — so drop those Claude-specific instructions and
+// leave the remaining paths relative (the footer points at the upstream repo).
+function sanitizeBody(body) {
+  return body
+    .replace(/^First invoke the Skill tool with `skill: "[^"]+"`.*\n?/m, '')
+    .replace(
+      /^Resolve plugin resources from `\$\{CLAUDE_PLUGIN_ROOT\}`, not from the paper project's working directory\. /m,
+      ''
+    )
+    .replace(/\$\{CLAUDE_PLUGIN_ROOT\}\//g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 const sourceDir = join(upstream, 'commands');
 const outputRoot = fileURLToPath(new URL('../commands/', import.meta.url));
 mkdirSync(outputRoot, { recursive: true });
@@ -55,7 +72,7 @@ for (const file of files) {
   }
   const name = fm.name;
   const description = fm.description ?? '';
-  let body = raw.replace(/^---\r?\n[\s\S]*?\r?\n---/, '').trim();
+  let body = sanitizeBody(raw.replace(/^---\r?\n[\s\S]*?\r?\n---/, '').trim());
   const trigger = body.match(/Trigger the `([a-z0-9-]+)`/);
   if (trigger) {
     body =

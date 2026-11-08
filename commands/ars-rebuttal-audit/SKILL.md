@@ -14,4 +14,6 @@ If only reviewer comments are present (no draft yet), use `revision-coach` inste
 Mode reference: `MODE_REGISTRY.md` § academic-paper.
 Skill entry: `academic-paper/SKILL.md`.
 
+If the skill or a required file cannot be loaded, report the loading failure and stop; do not substitute this command summary for the mode instructions.
+
 Note: this command was ported from the ARS Claude Code plugin (Imbad0202/academic-research-skills, CC-BY-NC-4.0). The deterministic tooling it references (scripts/*.py, MODE_REGISTRY.md, shared/) ships in the upstream repo — clone it alongside this plugin if you need script-based features such as the citation verification gate.
