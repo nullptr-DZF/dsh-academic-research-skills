@@ -12,4 +12,6 @@ Trigger the `academic-paper-reviewer` skill in `full` mode. Honor explicit alter
 Mode reference: `MODE_REGISTRY.md` § academic-paper-reviewer.
 Skill entry: `academic-paper-reviewer/SKILL.md`.
 
+If the skill or a required file cannot be loaded, report the loading failure and stop; do not substitute this command summary for the mode instructions.
+
 Note: this command was ported from the ARS Claude Code plugin (Imbad0202/academic-research-skills, CC-BY-NC-4.0). The deterministic tooling it references (scripts/*.py, MODE_REGISTRY.md, shared/) ships in the upstream repo — clone it alongside this plugin if you need script-based features such as the citation verification gate.

@@ -29,7 +29,7 @@ You MAY READ the paper draft and all provided artifacts for legitimate domain re
 
 If synthesis-side work is needed, return control to `editorial_synthesizer_agent`.
 
-**Enforcement (v3.9.2):** prompt-level fence + advisory verifier (`scripts/check_pipeline_integrity.py`). Since the #134 rescope (PR #294), a deterministic PreToolUse write-scope guard enforces the WRITE clause where a hook runs; where none runs, this fence is the enforcement layer. The v3.6.2 Sprint Contract Protocol below ALSO applies.
+**Enforcement (v3.9.2):** prompt-level fence + advisory verifier (`scripts/check_pipeline_integrity.py`). Since the #134 rescope (PR #294), a PreToolUse write-scope guard enforces the WRITE clause only when this role runs as a separately dispatched subagent of its own agent type in an install that wires the hook (the plugin install); when it runs inline in the main session (the default for most roles) or no hook runs, this fence is the enforcement layer. The v3.6.2 Sprint Contract Protocol below ALSO applies.
 
 ---
 
@@ -364,7 +364,17 @@ Do not total, weight, average, or mechanically map these judgements to the recom
 #### Missing Key References
 - [Recommended references for the author to add, with brief justification — as many as are genuinely warranted, zero allowed]
 
-**No-invention rule (#574 A5):** recommend only references you can actually attest exist. NEVER fabricate or guess author/year/venue metadata — the v3.11 citation gate verifies the AUTHOR'S citations, not the panel's suggestions, so an invented recommendation here enters the paper unchecked. Any recommendation you cannot ground in session materials MUST carry the `[UNVERIFIED]` tag and be phrased as a search lead ("literature on X, e.g. work by the Y group") rather than a confident citation. Relevance is assessed separately from existence: a real reference can still be a bad recommendation.
+~~~yaml suggested-references
+- title: "[exact title of a work named above]"
+  authors: ["[Surname, Initials]"]
+  year: "[year]"
+  doi: "[DOI, only if you can attest it; otherwise null]"
+  arxiv_id: "[arXiv ID, only if you can attest it; otherwise null]"
+~~~
+
+**Suggested-references block (#1001):** after the list, repeat each specific work this report names as one item of a `~~~yaml suggested-references` block, so the dispatching session can look it up in the bibliographic indexes after the decision. Give the title as you would cite it. Give a DOI or arXiv ID only when you can attest it; otherwise write `null`, never a guess: when an index queried by a wrong identifier finds no record and no index matches the title, the check reports the identifier as not found. Leave search leads out of the block. If this report names no specific work, write `[]` as the block's only line. The block adds no finding and changes no score.
+
+**No-invention rule (#574 A5):** recommend only references you can actually attest exist. NEVER fabricate or guess author/year/venue metadata — the v3.11 citation gate verifies the AUTHOR'S citations, not the panel's suggestions, and the suggested-reference check (#1001) runs only after the decision and changes nothing in it, so an invented recommendation here can still enter the paper. Any recommendation you cannot ground in session materials MUST carry the `[UNVERIFIED]` tag and be phrased as a search lead ("literature on X, e.g. work by the Y group") rather than a confident citation. Relevance is assessed separately from existence: a real reference can still be a bad recommendation.
 
 ### Questions for Authors
 1. [Domain questions requiring author clarification]

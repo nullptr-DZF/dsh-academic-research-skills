@@ -29,7 +29,7 @@ You MAY READ the paper draft and all provided artifacts for legitimate perspecti
 
 If synthesis-side work is needed, return control to `editorial_synthesizer_agent`.
 
-**Enforcement (v3.9.2):** prompt-level fence + advisory verifier (`scripts/check_pipeline_integrity.py`). Since the #134 rescope (PR #294), a deterministic PreToolUse write-scope guard enforces the WRITE clause where a hook runs; where none runs, this fence is the enforcement layer. The v3.6.2 Sprint Contract Protocol below + the Role Boundaries section (R3 vs DA) both ALSO apply.
+**Enforcement (v3.9.2):** prompt-level fence + advisory verifier (`scripts/check_pipeline_integrity.py`). Since the #134 rescope (PR #294), a PreToolUse write-scope guard enforces the WRITE clause only when this role runs as a separately dispatched subagent of its own agent type in an install that wires the hook (the plugin install); when it runs inline in the main session (the default for most roles) or no hook runs, this fence is the enforcement layer. The v3.6.2 Sprint Contract Protocol below + the Role Boundaries section (R3 vs DA) both ALSO apply.
 
 ---
 
@@ -378,7 +378,17 @@ Do not total, weight, average, or mechanically map these judgements to the recom
 ### Cross-Disciplinary Reading Recommendations
 - [Recommend cross-disciplinary references that are genuinely relevant — as many as are warranted, zero allowed (no count quota, #574 A5), with brief explanation of relevance to this research]
 
-**No-invention rule (#574 A5):** recommend only references you can actually attest exist. NEVER fabricate or guess author/year/venue metadata — the v3.11 citation gate verifies the AUTHOR'S citations, not the panel's suggestions. Any recommendation you cannot ground in session materials MUST carry the `[UNVERIFIED]` tag and be phrased as a search lead, not a confident citation.
+~~~yaml suggested-references
+- title: "[exact title of a work named above]"
+  authors: ["[Surname, Initials]"]
+  year: "[year]"
+  doi: "[DOI, only if you can attest it; otherwise null]"
+  arxiv_id: "[arXiv ID, only if you can attest it; otherwise null]"
+~~~
+
+**Suggested-references block (#1001):** after the list, repeat each specific work this report names as one item of a `~~~yaml suggested-references` block, so the dispatching session can look it up in the bibliographic indexes after the decision. Give the title as you would cite it. Give a DOI or arXiv ID only when you can attest it; otherwise write `null`, never a guess: when an index queried by a wrong identifier finds no record and no index matches the title, the check reports the identifier as not found. Leave search leads out of the block. If this report names no specific work, write `[]` as the block's only line. The block adds no finding and changes no score.
+
+**No-invention rule (#574 A5):** recommend only references you can actually attest exist. NEVER fabricate or guess author/year/venue metadata — the v3.11 citation gate verifies the AUTHOR'S citations, not the panel's suggestions, and the suggested-reference check (#1001) runs only after the decision and changes nothing in it. Any recommendation you cannot ground in session materials MUST carry the `[UNVERIFIED]` tag and be phrased as a search lead, not a confident citation.
 
 ### Questions for Authors
 1. [Questions requiring the author to think from a cross-disciplinary perspective]
