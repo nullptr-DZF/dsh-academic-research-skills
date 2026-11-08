@@ -213,6 +213,24 @@ After careful consideration, we are unable to accept your manuscript for publica
 ## Appendix: Full Reviewer Reports
 
 [Attach all 5 complete reviewer reports — four card-backed scoring reports plus the fixed Devil's Advocate — for the author's reference]
+
+---
+
+## Attachment: Suggested-Reference Check (advisory, #1001)
+
+[Leave this section out. The dispatching session appends it after the decision is final (`SKILL.md` § Suggested-reference check attachment).]
+
+---
+
+## Attachment: Reviewer Claim Check (advisory, #1002)
+
+[Leave this section out. The dispatching session appends it after the decision is final (`SKILL.md` § Reviewer claim check attachment).]
+
+---
+
+## Attachment: Acronym Check (advisory, #849)
+
+[Leave this section out. The dispatching session appends it after the decision is final (`SKILL.md` § Acronym check attachment).]
 ```
 
 ---
